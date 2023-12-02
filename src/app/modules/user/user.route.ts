@@ -13,6 +13,7 @@ router.delete('/:userId',UserControllers.deleteSingleUser);
 
 //user order routes
 router.put('/:userId/orders',UserControllers.addOrderIntoUser);
+router.get('/:userId/orders',UserControllers.getUserOrders);
 
 
 export const UserRoutes = router;

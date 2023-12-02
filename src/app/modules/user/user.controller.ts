@@ -233,6 +233,41 @@ const addOrderIntoUser = async(req:Request,res:Response) =>{
     }
 }
 
+// get orders of a user 
+const getUserOrders = async(req:Request,res:Response) =>{
+    try{
+        const userId    = req.params.userId;
+        const result    = await UserServices.getUserOrdersFromDB(userId);
+        if(result.error == false){
+            res.status(200).json({
+                success:true,
+                message:result.message,
+                data:result.data
+            });
+        }else{
+            res.status(404).json({
+                success:false,
+                message:result.message,
+                error: {
+                    "code": 404,
+                    "description": result.message,
+                }
+            });
+        }
+        
+    }catch(error : any){
+
+        res.status(500).json({
+            success:false,
+            message:error.message || 'Something went wrong!',
+            error: {
+                "code": 404,
+                "description": error.message || 'Something went wrong!'
+            }
+        })
+        
+    }
+}
 
 export const UserControllers = {
     createUser,
@@ -241,4 +276,5 @@ export const UserControllers = {
     updateSingleUser,
     deleteSingleUser,
     addOrderIntoUser,
+    getUserOrders,
 }
