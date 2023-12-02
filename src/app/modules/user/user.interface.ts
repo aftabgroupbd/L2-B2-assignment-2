@@ -1,21 +1,27 @@
+/* eslint-disable no-unused-vars */
 import { Model } from "mongoose";
 
+// define user name type 
 export type TUserName = {
     firstName: string;
     lastName: string;
 };
 
+// define user adress 
 export type TUserAddress = {
     street: string;
     city: string;
     country: string;
 };
+
+// define user order type 
 export type TUserOrders = {
     productName: string;
     price: number;
     quantity: number;
 };
 
+// define user type 
 export type TUser = {
     userId: number;
     username: string;
@@ -32,4 +38,5 @@ export type TUser = {
 // create static methods 
 export interface UserModel extends Model<TUser>{
     isUserExists(id:string): Promise<TUser | null>;
-  }
+    isUserNameExists(username:string): Promise<TUser | null>;
+}

@@ -1,6 +1,7 @@
 import { Schema, model } from "mongoose";
 import { TUser, TUserAddress, TUserName, TUserOrders, UserModel } from "./user.interface";
-
+import bcrypt from 'bcrypt';
+import config from "../../config";
 
 
 
@@ -81,5 +82,36 @@ const userSchema = new Schema<TUser, UserModel>({
       virtuals:true
     }
 });
+
+// password hash hook 
+userSchema.pre('save',async function(next){
+
+  // eslint-disable-next-line @typescript-eslint/no-this-alias
+  const user = this; // document
+  user.password = await bcrypt.hash(user.password,Number(config.bcrypt_salt_rounds))
+  next();
+})
+
+// password empty hook
+userSchema.post('save',async function(doc,next){
+  next();
+})
+
+//create a virtual property for calculate total order sum
+// eslint-disable-next-line no-unused-vars
+userSchema.virtual('totalOrdersPrice').get(function (this: TUser) {
+  return this.orders.reduce((sum, order) => sum + order.price * order.quantity, 0);
+});
+
+
+// create a custom static methods 
+userSchema.statics.isUserExists = async function(id:string){
+  const existingUser = await User.findOne({userId:id});
+  return existingUser;
+}
+userSchema.statics.isUserNameExists = async function(username:string){
+  const existingUser = await User.findOne({username:username});
+  return existingUser;
+}
 
 export const User = model<TUser, UserModel>('User', userSchema);
