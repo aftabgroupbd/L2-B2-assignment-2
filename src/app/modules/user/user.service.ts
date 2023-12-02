@@ -208,58 +208,6 @@ const addOrderIntoUserFromDB = async (userId: string,orderData:TUserOrders) => {
         error:error,
     };
 };
-const getUserOrdersFromDB = async (userId: string) => {
-    let error       = true;
-    let message     = "Order fetched successfully!";
-    const result    = await User.findOne({ userId:userId });
-    let orders;
-    if(result){
-
-        if(typeof result.orders !== 'undefined'){
-            if(result.orders.length > 0){
-                error   = false;
-                orders  = result.orders;
-            }else{
-                message     = "Order not found!";
-            }
-        }else{
-            message     = "Order not found!";
-        }
-    }else{
-        message     = "User not found!";
-    }
-    return {
-        message:message,
-        error:error,
-        data:orders
-    };
-};
-const getUserOrdersTotalFromDB = async (userId: string) => {
-    let error       = true;
-    let message     = "Total price calculated successfully!";
-    const result    = await User.findOne({ userId:userId });
-    let orders;
-    if(result){
-
-        if(typeof result.orders !== 'undefined'){
-            if(result.orders.length > 0){
-                error   = false;
-                orders  = result.totalOrdersPrice;
-            }else{
-                message     = "Order not found!";
-            }
-        }else{
-            message     = "Order not found!";
-        }
-    }else{
-        message     = "User not found!";
-    }
-    return {
-        message:message,
-        error:error,
-        data:{totalPrice:orders}
-    };
-};
 export const UserServices = {
     createUserIntoDB,
     getUsersFromDB,
@@ -267,6 +215,4 @@ export const UserServices = {
     updateSingleUserFromDB,
     deleteSingleUserFromDB,
     addOrderIntoUserFromDB,
-    getUserOrdersFromDB,
-    getUserOrdersTotalFromDB
 };

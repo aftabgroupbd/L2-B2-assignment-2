@@ -13,8 +13,6 @@ router.delete('/:userId',UserControllers.deleteSingleUser);
 
 //user order routes
 router.put('/:userId/orders',UserControllers.addOrderIntoUser);
-router.get('/:userId/orders',UserControllers.getUserOrders);
-router.get('/:userId/orders/total-price',UserControllers.getUserOrdersTotal);
 
 
 export const UserRoutes = router;
