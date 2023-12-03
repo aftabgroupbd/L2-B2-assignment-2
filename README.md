@@ -26,24 +26,27 @@ Before you begin, ensure you have the following installed on your machine:
 ### Installation
 
 1. Clone the repository:
+    ```bash
+    git clone https://github.com/your-username/your-project.git
 
-   ```bash
-   git clone https://github.com/your-username/your-project.git
+2. Navigate to the project directory:
+    ```bash
+    cd your-project
 
-### Navigate to the project directory:
-cd your-project
+3. Install dependencies:
+    ```bash
+    npm install
 
-### Install dependencies:
-npm install
-
-### Set up your MongoDB database and update the connection string in the .env file:
+4. Set up your MongoDB database and update the connection string in the .env file:
 DATABASE_URL=mongodb+srv://aftab:Hl7d6USpQg5SfpJV@cluster0.mkq5cex.mongodb.net/first-mdb-project?retryWrites=true&w=majority
 
-### Build the TypeScript files:
-npm run build
+5. Build the TypeScript files:
+    ```bash
+    npm run build
 
-### Run the application:
-npm run start:dev
+6. Run the application:
+    ```bash
+    npm run start:dev
 
 ## The server should now be running on http://localhost:5000.
 
