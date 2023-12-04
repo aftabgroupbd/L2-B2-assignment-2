@@ -31,7 +31,7 @@ Before you begin, ensure you have the following installed on your machine:
 
 2. Navigate to the project directory:
     ```bash
-    cd your-project
+    cd L2-B2-assignment-2
 
 3. Install dependencies:
     ```bash

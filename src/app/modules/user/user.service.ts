@@ -244,7 +244,7 @@ const getUserOrdersTotalFromDB = async (userId: string) => {
         if(typeof result.orders !== 'undefined'){
             if(result.orders.length > 0){
                 error   = false;
-                orders  = result.totalOrdersPrice;
+                orders  = result.orders.reduce((sum, order) => sum + order.price * order.quantity, 0);
             }else{
                 message     = "Order not found!";
             }

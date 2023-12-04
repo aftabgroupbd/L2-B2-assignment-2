@@ -97,13 +97,6 @@ userSchema.post('save',async function(doc,next){
   next();
 })
 
-//create a virtual property for calculate total order sum
-// eslint-disable-next-line no-unused-vars
-userSchema.virtual('totalOrdersPrice').get(function (this: TUser) {
-  return this.orders.reduce((sum, order) => sum + order.price * order.quantity, 0);
-});
-
-
 // create a custom static methods 
 userSchema.statics.isUserExists = async function(id:string){
   const existingUser = await User.findOne({userId:id});
