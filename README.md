@@ -27,7 +27,7 @@ Before you begin, ensure you have the following installed on your machine:
 
 1. Clone the repository:
     ```bash
-    git clone https://github.com/your-username/your-project.git
+    git clone https://github.com/aftabgroupbd/L2-B2-assignment-2.git
 
 2. Navigate to the project directory:
     ```bash
@@ -49,7 +49,4 @@ DATABASE_URL=mongodb+srv://aftab:Hl7d6USpQg5SfpJV@cluster0.mkq5cex.mongodb.net/f
     npm run start:dev
 
 ## The server should now be running on http://localhost:5000.
-
-## Usage
-Describe how to use your application and any API endpoints.
 
