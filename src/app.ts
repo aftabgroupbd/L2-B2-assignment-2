@@ -11,7 +11,10 @@ app.use(cors());
 app.use('/api/users',UserRoutes);
 
 app.get('/', (req: Request, res: Response) => {
-  res.send('Dear Sir, You have arrived at my assignment number two.');
+  res.status(200).json({
+    success:true,
+    message:'Dear Sir, You have arrived at my assignment number two.'
+  })
 });
 
 export default app;
