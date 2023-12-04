@@ -7,12 +7,6 @@ This is a Node.js Express application built with TypeScript, MongoDB, and Mongoo
 - [Getting Started](#getting-started)
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
-- [Project Structure](#project-structure)
-- [Data Models](#data-models)
-- [Usage](#usage)
-- [Contributing](#contributing)
-- [License](#license)
-
 ## Getting Started
 
 ### Prerequisites
