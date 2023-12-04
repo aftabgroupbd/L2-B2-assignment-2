@@ -54,7 +54,7 @@ const getAllUser = async(req:Request,res:Response) =>{
         res.status(200).json({
             success:true,
             message:"Users fetched successfully!",
-            data:result
+            data:result.data
         });
     }catch(error : any){
 
@@ -72,7 +72,7 @@ const getAllUser = async(req:Request,res:Response) =>{
 // find a user 
 const getSingleUser = async(req:Request,res:Response) =>{
     try{
-        const userId    = req.params.userId;
+        const userId:number    = parseInt(req.params.userId);
         const result    = await UserServices.getSingleUserFromDB(userId);
         if(result){
             res.status(200).json({
@@ -108,7 +108,7 @@ const getSingleUser = async(req:Request,res:Response) =>{
 // update a user 
 const updateSingleUser = async(req:Request,res:Response) =>{
     try{
-        const userId        = req.params.userId;
+        const userId:number    = parseInt(req.params.userId);
         const userData      = req.body;
         const zodParseData  = userValidationSchema.parse(userData);
         const result        = await UserServices.updateSingleUserFromDB(userId,zodParseData);
@@ -153,7 +153,7 @@ const updateSingleUser = async(req:Request,res:Response) =>{
 // delete a user 
 const deleteSingleUser = async(req:Request,res:Response) =>{
     try{
-        const userId        = req.params.userId;
+        const userId:number    = parseInt(req.params.userId);
         const result        = await UserServices.deleteSingleUserFromDB(userId);
         if(result.error == false){
             res.status(200).json({
@@ -189,7 +189,7 @@ const deleteSingleUser = async(req:Request,res:Response) =>{
 // add order into a user 
 const addOrderIntoUser = async(req:Request,res:Response) =>{
     try{
-        const userId        = req.params.userId;
+        const userId:number    = parseInt(req.params.userId);
         const userData      = req.body;
         const zodParseData  = TUserOrdersSchema.parse(userData);
         const result        = await UserServices.addOrderIntoUserFromDB(userId,zodParseData);
@@ -236,7 +236,8 @@ const addOrderIntoUser = async(req:Request,res:Response) =>{
 // get orders of a user 
 const getUserOrders = async(req:Request,res:Response) =>{
     try{
-        const userId    = req.params.userId;
+        const userId:number    = parseInt(req.params.userId);
+        
         const result    = await UserServices.getUserOrdersFromDB(userId);
         if(result.error == false){
             res.status(200).json({
@@ -271,7 +272,7 @@ const getUserOrders = async(req:Request,res:Response) =>{
 // get orders of a user 
 const getUserOrdersTotal = async(req:Request,res:Response) =>{
     try{
-        const userId    = req.params.userId;
+        const userId:number    = parseInt(req.params.userId);
         const result    = await UserServices.getUserOrdersTotalFromDB(userId);
         if(result.error == false){
             res.status(200).json({

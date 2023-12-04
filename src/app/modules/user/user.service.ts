@@ -4,7 +4,7 @@ import { User } from "./user.model";
 
 const createUserIntoDB = async (userData: TUser) => {
   
-    const user_id:string = userData.userId.toString();
+    const user_id = userData.userId;
     let user;
     let error   = false;
     let message = 'User not found!';
@@ -91,7 +91,7 @@ const getUsersFromDB = async () => {
 };
 
 
-const getSingleUserFromDB = async (userId: string) => {
+const getSingleUserFromDB = async (userId: number) => {
     const result = await User.findOne({ userId:userId });
     let user;
     if(result)
@@ -117,7 +117,7 @@ const getSingleUserFromDB = async (userId: string) => {
     return user;
 };
 
-const updateSingleUserFromDB = async (userId: string,userData:TUser) => {
+const updateSingleUserFromDB = async (userId: number,userData:TUser) => {
 
     // check user is already exists or not
     const updateUser = await User.isUserExists(userId);
@@ -161,7 +161,7 @@ const updateSingleUserFromDB = async (userId: string,userData:TUser) => {
     };
 };
 
-const deleteSingleUserFromDB = async (userId: string) => {
+const deleteSingleUserFromDB = async (userId: number) => {
 
     // check user is already exists or not
     const updateUser = await User.isUserExists(userId);
@@ -181,7 +181,7 @@ const deleteSingleUserFromDB = async (userId: string) => {
     };
 };
 
-const addOrderIntoUserFromDB = async (userId: string,orderData:TUserOrders) => {
+const addOrderIntoUserFromDB = async (userId: number,orderData:TUserOrders) => {
 
     // check user is already exists or not
     const updateUser = await User.isUserExists(userId);
@@ -208,7 +208,7 @@ const addOrderIntoUserFromDB = async (userId: string,orderData:TUserOrders) => {
         error:error,
     };
 };
-const getUserOrdersFromDB = async (userId: string) => {
+const getUserOrdersFromDB = async (userId: number) => {
     let error       = true;
     let message     = "Order fetched successfully!";
     const result    = await User.findOne({ userId:userId });
@@ -218,7 +218,11 @@ const getUserOrdersFromDB = async (userId: string) => {
         if(typeof result.orders !== 'undefined'){
             if(result.orders.length > 0){
                 error   = false;
-                orders  = result.orders;
+                orders  = result.orders.map((order)=>{return {
+                    productName:order.productName,
+                    price:order.price,
+                    quantity:order.quantity
+                }});
             }else{
                 message     = "Order not found!";
             }
@@ -234,7 +238,7 @@ const getUserOrdersFromDB = async (userId: string) => {
         data:orders
     };
 };
-const getUserOrdersTotalFromDB = async (userId: string) => {
+const getUserOrdersTotalFromDB = async (userId: number) => {
     let error       = true;
     let message     = "Total price calculated successfully!";
     const result    = await User.findOne({ userId:userId });
